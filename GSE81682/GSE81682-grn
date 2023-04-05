@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo $PWD
+
+# Folder where all the programs can be found
+#path_to_seidr=~/Git/seidr
+# Count matrix
+gunzip -c *.gz > count_mat.txt
+
+# Filter count matrix
+awk '{ if ($1 ~ /^ENS/) {print}}' count_mat.txt > count_mat_filtered.txt
+
+# Filter out rows(genes) that have zero variance
+Rscript -e "
+data <- data.table::fread('count_mat_filtered.txt', header = FALSE)
+data.table::fwrite(data[apply(data[, -1], MARGIN = 1, FUN = var) != 0, ], col.names = FALSE, row.names = FALSE, quote = FALSE, sep = ' ')
+" > count_mat_filtered_rm_zeroVar_gene.txt
+
+awk '{print $1}' count_mat_filtered_rm_zeroVar_gene.txt > gene_list.txt
+
+# Transpose matrix. Columns should be genes
+Rscript -e "
+data.table::fwrite(t(data.table::fread('count_mat_filtered_rm_zeroVar_gene.txt', header = FALSE))[, 1:100], col.names = FALSE, row.names = FALSE, quote = FALSE, sep = '\t')
+" > count_mat_filtered_t.tsv
+
+awk '{if (NR > 1) {print}}' count_mat_filtered_t.tsv > count_mat_filtered_no_symbol.tsv
+
+head -100 gene_list.txt > gene_sub_list.txt
+
+correlation -m pearson -g gene_sub_list.txt -i count_mat_filtered_no_symbol.tsv
+
+#mi -m RAW -i count_mat_filtered_no_symbol.txt -g gene_list.txt -o mi_scores.tsv
+
+#rm *mat* gene_list.txt 
