@@ -1,0 +1,18 @@
+---
+title: "CSDS459-data"
+format: html
+editor: visual
+---
+
+```{r setup}
+library(Biobase)
+library(GEOquery)
+```
+
+```{r eval=FALSE}
+getGEOSuppFiles('GSE81252', baseDir = '.')
+getGEOSuppFiles('GSE75748', baseDir = '.')
+getGEOSuppFiles('GSE98664', baseDir = '.')
+getGEOSuppFiles('GSE48968', baseDir = '.')
+getGEOSuppFiles('GSE81682', baseDir = '.')
+```

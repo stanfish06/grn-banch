@@ -1,0 +1,15 @@
+"0","getGEOSuppFiles('GSE48968', baseDir = '.')
+"
+"2","trying URL 'https://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48968/suppl//GSE48968_allgenesTPM_GSM1189042_GSM1190902.txt.gz?tool=geoquery'
+"
+"2","downloaded 66.1 MB
+
+"
+"2","trying URL 'https://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48968/suppl//GSE48968_allgenesTPM_GSM1406531_GSM1407094.txt.gz?tool=geoquery'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 18671847 bytes (17.8 MB)
+"
+"2","downloaded 17.8 MB
+
+"
